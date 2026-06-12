@@ -2,8 +2,6 @@ import os
 from binance.client import Client
 from dotenv import load_dotenv
 
-FUTURES_TESTNET_URL = "https://testnet.binancefuture.com"
-
 
 def get_client() -> Client:
     load_dotenv()
@@ -16,7 +14,6 @@ def get_client() -> Client:
             "BINANCE_API_KEY and BINANCE_API_SECRET must be set in your .env file."
         )
 
-    client = Client(api_key, api_secret)
-    # Point futures endpoints at the testnet
-    client.FUTURES_URL = FUTURES_TESTNET_URL
+    # testnet=True routes all futures endpoints to https://testnet.binancefuture.com/fapi
+    client = Client(api_key, api_secret, testnet=True)
     return client

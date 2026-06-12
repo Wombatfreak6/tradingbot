@@ -44,7 +44,7 @@ BINANCE_API_SECRET=your_actual_secret
 
 ## Usage
 
-Run all commands from the `trading_bot/` directory:
+Run all commands from the `tradingbot/` project root:
 
 ```bash
 python cli.py --symbol <SYMBOL> --side <BUY|SELL> --type <TYPE> --quantity <QTY> [options]
@@ -56,10 +56,10 @@ python cli.py --symbol <SYMBOL> --side <BUY|SELL> --type <TYPE> --quantity <QTY>
 |------|----------|-------------|
 | `--symbol` | ✅ | Trading pair, e.g. `BTCUSDT` |
 | `--side` | ✅ | `BUY` or `SELL` |
-| `--type` | ✅ | `MARKET`, `LIMIT`, `STOP_MARKET`, or `STOP_LIMIT` |
+| `--type` | ✅ | `MARKET`, `LIMIT`, `STOP_MARKET`, or `STOP` (stop-limit) |
 | `--quantity` | ✅ | Order size in base asset |
-| `--price` | LIMIT / STOP_LIMIT | Limit price |
-| `--stop-price` | STOP_MARKET / STOP_LIMIT | Trigger price |
+| `--price` | LIMIT / STOP | Limit price |
+| `--stop-price` | STOP_MARKET / STOP | Trigger price |
 | `--tif` | No | Time-in-force (default: `GTC`) |
 
 ---
@@ -104,17 +104,17 @@ python cli.py --symbol BTCUSDT --side SELL --type STOP_MARKET --quantity 0.01 --
 python cli.py --symbol BTCUSDT --side BUY --type STOP_MARKET --quantity 0.01 --stop-price 72000
 ```
 
-### STOP_LIMIT — Sell 0.01 BTC, trigger at $58,000, limit at $57,800
+### STOP (stop-limit) — Sell 0.01 BTC, trigger at $58,000, limit at $57,800
 
 ```bash
-python cli.py --symbol BTCUSDT --side SELL --type STOP_LIMIT --quantity 0.01 \
+python cli.py --symbol BTCUSDT --side SELL --type STOP --quantity 0.01 \
   --stop-price 58000 --price 57800
 ```
 
-### STOP_LIMIT — Buy 0.01 BTC, trigger at $72,000, limit at $72,200
+### STOP (stop-limit) — Buy 0.01 BTC, trigger at $72,000, limit at $72,200
 
 ```bash
-python cli.py --symbol BTCUSDT --side BUY --type STOP_LIMIT --quantity 0.01 \
+python cli.py --symbol BTCUSDT --side BUY --type STOP --quantity 0.01 \
   --stop-price 72000 --price 72200
 ```
 
@@ -122,9 +122,9 @@ python cli.py --symbol BTCUSDT --side BUY --type STOP_LIMIT --quantity 0.01 \
 
 ## Assumptions
 
-- **Testnet only** — all requests go to `https://testnet.binancefuture.com`. Do not use real API keys.
+- **Testnet only** — all requests go to `https://testnet.binancefuture.com/fapi`. Do not use real API keys.
 - **USDT-M Perpetual Futures** — only USDT-margined perpetual contracts are supported.
-- **GTC default** — time-in-force defaults to `GTC` (Good Till Cancelled) for LIMIT and STOP_LIMIT orders.
+- **GTC default** — time-in-force defaults to `GTC` (Good Till Cancelled) for LIMIT and STOP orders.
 - Quantities and prices must conform to the symbol's filter rules (tick size, lot size) on the testnet exchange.
 
 ---

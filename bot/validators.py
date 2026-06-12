@@ -1,7 +1,10 @@
 VALID_SIDES = {"BUY", "SELL"}
-VALID_ORDER_TYPES = {"MARKET", "LIMIT", "STOP_MARKET", "STOP_LIMIT"}
-PRICE_REQUIRED_TYPES = {"LIMIT", "STOP_LIMIT"}
-STOP_PRICE_REQUIRED_TYPES = {"STOP_MARKET", "STOP_LIMIT"}
+# Binance Futures API order types:
+#   STOP       = stop-limit order (conditional; triggerPrice + limit price + timeInForce)
+#   STOP_MARKET = stop-market order (conditional; triggerPrice only)
+VALID_ORDER_TYPES = {"MARKET", "LIMIT", "STOP_MARKET", "STOP"}
+PRICE_REQUIRED_TYPES = {"LIMIT", "STOP"}
+STOP_PRICE_REQUIRED_TYPES = {"STOP_MARKET", "STOP"}
 
 
 class ValidationError(Exception):

@@ -25,13 +25,15 @@ def place_order(
         "quantity": quantity,
     }
 
-    # LIMIT and STOP_LIMIT need a limit price and time-in-force
-    if order_type in {"LIMIT", "STOP_LIMIT"}:
+    # LIMIT and STOP (stop-limit) need a limit price and time-in-force
+    if order_type in {"LIMIT", "STOP"}:
         params["price"] = price
         params["timeInForce"] = time_in_force
 
-    # STOP_MARKET and STOP_LIMIT need a trigger price
-    if order_type in {"STOP_MARKET", "STOP_LIMIT"}:
+    # STOP_MARKET and STOP (stop-limit) need a trigger price.
+    # Note: python-binance automatically renames stopPrice → triggerPrice for
+    # conditional order types (STOP, STOP_MARKET) when routing to the algo endpoint.
+    if order_type in {"STOP_MARKET", "STOP"}:
         params["stopPrice"] = stop_price
 
     logger.info(f"Placing order with params: {params}")

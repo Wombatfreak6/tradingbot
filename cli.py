@@ -18,13 +18,13 @@ def build_parser() -> argparse.ArgumentParser:
         "--type",
         dest="order_type",
         required=True,
-        choices=["MARKET", "LIMIT", "STOP_MARKET", "STOP_LIMIT"],
+        choices=["MARKET", "LIMIT", "STOP_MARKET", "STOP"],
         metavar="TYPE",
-        help="Order type: MARKET | LIMIT | STOP_MARKET | STOP_LIMIT",
+        help="Order type: MARKET | LIMIT | STOP_MARKET | STOP (stop-limit)",
     )
     parser.add_argument("--quantity", required=True, type=float)
-    parser.add_argument("--price", type=float, default=None, help="Limit price (LIMIT / STOP_LIMIT)")
-    parser.add_argument("--stop-price", type=float, default=None, dest="stop_price", help="Trigger price (STOP_MARKET / STOP_LIMIT)")
+    parser.add_argument("--price", type=float, default=None, help="Limit price (LIMIT / STOP)")
+    parser.add_argument("--stop-price", type=float, default=None, dest="stop_price", help="Trigger price (STOP_MARKET / STOP)")
     parser.add_argument("--tif", default="GTC", dest="time_in_force", help="Time-in-force (default: GTC)")
     return parser
 

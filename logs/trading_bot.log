@@ -1,0 +1,2 @@
+2026-06-12 15:03:17,073 - ERROR - Validation failed: Invalid symbol 'btcusdt': must be a non-empty uppercase alphanumeric string.
+2026-06-12 15:03:26,589 - ERROR - Client setup failed: BINANCE_API_KEY and BINANCE_API_SECRET must be set in your .env file.
